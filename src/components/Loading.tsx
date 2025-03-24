@@ -1,6 +1,7 @@
 import Lottie from "lottie-react";
 import React from "react";
 import articleLoading from "../assets/loading.json";
+import mainLoading from "../assets/mainLoading.json";
 
 function Loading() {
   return (
@@ -94,6 +95,22 @@ interface AnimationLoadingProps {
 
 export const AnimationLoading: React.FC<AnimationLoadingProps> = ({
   animation = articleLoading,
+  loop = true,
+  autoplay = true,
+  styles = "w-[200px] mx-auto md:w-[230px]",
+}) => {
+  return (
+    <Lottie
+      animationData={animation}
+      className={styles}
+      loop={loop}
+      autoplay={autoplay}
+    />
+  );
+};
+
+export const MainLoader: React.FC<AnimationLoadingProps> = ({
+  animation = mainLoading,
   loop = true,
   autoplay = true,
   styles = "w-[200px] mx-auto md:w-[230px]",

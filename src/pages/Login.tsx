@@ -8,8 +8,10 @@ import Logo from "../components/Logo";
 import TextField from "../components/TextField";
 import axios, { axiosErrorToast } from "../utils/axios";
 import { ShowOffIcon, ShowOnIcon } from "../assets/Icons";
-import Logo_UI from "../assets/logo_ui.png";
+import Logo_UI from "../assets/B.png";
 import GoogleAuth from "../components/GoogleAuth";
+import UIStore, { UserDetailsStore } from "../Store";
+import { handleStoreUserDetails } from "../utils/service";
 
 const Login: React.FC = () => {
   const existingUserCheck = Cookies.get("token");
@@ -24,29 +26,61 @@ const Login: React.FC = () => {
     }
   }, [existingUserCheck, navigate]);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
-    axios
-      .post("/auth/login", { username, password })
-      .then((res) => {
-        setLoading(false);
-        if (res.data.access_token) {
-          Cookies.set("token", res.data.access_token);
-          Cookies.set("userId", res.data.userId);
-          const el = JSON.parse(
-            sessionStorage.getItem("existingLinks") ?? "[]"
-          );
-          if (el.length > 0) {
-            window.location.href = `/my-links/${username}`;
-          } else {
-            window.location.href = "/";
-          }
+
+    try {
+      const res = await axios.post("/auth/login", { username, password });
+
+      setLoading(false);
+      if (res.data.access_token) {
+        Cookies.set("token", res.data.access_token);
+        Cookies.set("userId", res.data.userId);
+        Cookies.set("username", username);
+
+        // Wait for user details to be stored before redirecting
+        const data_ = await handleStoreUserDetails(res.data.userId);
+        if (data_) {
+          let data: any = {
+            firstName: data_.user?.firstName,
+            lastName: data_.user?.lastName,
+            address: data_.user?.address,
+            dateOfJoin: data_.user?.dateOfJoin,
+            email: data_.user?.email,
+            licenseNo: data_.user?.licenseNo,
+            role: data_.user?.role,
+            username: data_.user?.username,
+            bio: data_.user?.bio,
+            profileUrl: data_.user?.profileUrl,
+          };
+          localStorage.setItem("userDetails", JSON.stringify(data));
+          UserDetailsStore.update((s) => {
+            s.firstName = data_.user?.firstName;
+            s.lastName = data_.user?.lastName;
+            s.address = data_.user?.address;
+            s.dateOfJoin = data_.user?.dateOfJoin;
+            s.email = data_.user?.email;
+            s.licenseNo = data_.user?.licenseNo;
+            s.role = data_.user?.role;
+            s.username = data_.user?.username;
+            s.bio = data_.user?.bio;
+            s.profileUrl = data_.user?.profileUrl;
+          });
         }
-      })
-      .catch((err) => {
-        setLoading(false);
-        axiosErrorToast(err);
-      });
+
+        UIStore.update((s) => {
+          s.userLoggedIn = true;
+          s.username = username;
+          s.userId = res.data.userId;
+          s.profileUrl = data_.user.profileUrl;
+        });
+
+        navigate("/");
+      }
+    } catch (err: any) {
+      setLoading(false);
+      axiosErrorToast(err);
+    }
   };
 
   return (
@@ -58,7 +92,7 @@ const Login: React.FC = () => {
             alt="logo"
             width="80"
             height="80"
-            className="mx-auto"
+            className="mx-auto rounded-full"
           />
         </div>
         <div className="logo pb-3">

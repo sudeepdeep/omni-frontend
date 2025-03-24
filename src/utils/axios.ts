@@ -10,12 +10,24 @@ interface ErrorResponse {
 const token = Cookies.get("token") || ""; // Default to an empty string if token is not found
 console.log(token, "axiostoken");
 const axios = Axios.create({
-  baseURL: process.env.REACT_APP_API_HOST,
+  baseURL:
+    process.env.REACT_APP_API_HOST ?? "https://omni-backend-lake.vercel.app",
   headers: {
     Authorization: `Bearer ${token}`,
     Application: "unilinks",
   },
 });
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("token"); // Get the latest token
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 export default axios;
 

@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(90%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-marquee-vertical {
+  display: block;
+  animation: marquee-vertical 8s linear infinite; /* Slow scroll */
+  animation-play-state: running;
+}
+
+.animate-marquee-vertical:hover {
+  animation-play-state: paused; /* Stop the scroll on hover */
+}
+
+/* breaking news marquee */
+
+@keyframes marquee-vertical-breaking {
+  0% {
+    transform: translateY(90%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-marquee-vertical-breaking {
+  display: block;
+  animation: marquee-vertical-breaking 30s linear infinite; /* Slow scroll */
+  animation-play-state: running;
+}
+
+.animate-marquee-vertical-breaking:hover {
+  animation-play-state: paused; /* Stop the scroll on hover */
+}

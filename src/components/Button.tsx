@@ -33,3 +33,24 @@ export const Button: React.FC<ButtonProps> = ({
     </div>
   );
 };
+
+export const Button2: React.FC<ButtonProps> = ({
+  disabled = false,
+  text = "submit",
+  handleSubmit,
+  loading = false,
+  sx = "",
+}) => {
+  return (
+    <button
+      type="button" // Prevents form submission
+      onClick={handleSubmit}
+      disabled={disabled || loading} // Prevent multiple clicks while loading
+      className={`p-3 text-center relative my-3 flex items-center justify-center ${
+        disabled ? "cursor-not-allowed" : "cursor-pointer"
+      } text-black hover:bg-[#1db954e1] border-[1px] border-[#1db954e1] rounded-md transition duration-300 ease-in-out ${sx}`}
+    >
+      {loading ? "Submitting..." : text}
+    </button>
+  );
+};

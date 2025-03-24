@@ -7,16 +7,7 @@ import Cookies from "js-cookie";
 function Success() {
   useEffect(() => {
     setTimeout(() => {
-      const elinks = JSON.parse(
-        sessionStorage.getItem("existingLinks") ?? "[]"
-      );
-      console.log(elinks, "elinnksdata");
-      const username = Cookies.get("username");
-      if (elinks.length > 0) {
-        window.location.href = `/my-links/${username}`;
-      } else {
-        window.location.href = "/";
-      }
+      window.location.href = "/";
     }, 3000);
   }, []);
   return (

@@ -1,27 +1,54 @@
 import { Outlet } from "react-router-dom";
-import { checkUserLoggedIn } from "../utils/service";
 import Navbar from "../components/Navbar";
 import SideBar from "../components/SideBar";
 import { useEffect, useState } from "react";
-import { UIStore } from "../Store";
 import Cookies from "js-cookie";
+import BreakingNews from "../components/Home/BreakingNews/BreakingNews";
+import PopularNews from "../components/Home/Feed/PopularNews";
+import UploadPost from "../components/Home/Feed/UploadPost";
+import ProfileCard from "../components/Home/ProfileCard";
+import TrendingNow from "../components/Home/TrendingNow";
+import { checkUserLoggedIn } from "../utils/service";
+import UIStore from "../Store";
 
 function AppLayout() {
   const currentPath = window.location.pathname;
-  const uiStore = UIStore.useState();
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
   useEffect(() => {
     if (Cookies.get("token")) {
-      setUserLoggedIn(true);
+      checkUserLoggedIn();
       console.log(Cookies.get("token"), "token");
-      // checkUserLoggedIn();
     }
   }, []);
-  checkUserLoggedIn();
+  const ui = UIStore.useState();
   return (
     <div className="min-h-[100vh] h-auto  font-poppins">
       <Navbar />
-      {uiStore.userLoggedIn && currentPath !== "/" ? (
+
+      <div className="hidden lg:block bg-[#F4F2EE]">
+        <div className="p-[10px] w-[90%] min-h-[90vh] mx-auto flex gap-[20px] md:flex-row flex-col">
+          <div className="md:w-[20%] w-[100%] rounded-md flex flex-col gap-[10px]">
+            <BreakingNews />
+            <PopularNews />
+          </div>
+          <div className="md:w-[60%] w-[100%] rounded-md flex flex-col gap-[10px]">
+            <UploadPost />
+            <Outlet />
+          </div>
+          <div className="md:w-[20%] w-[100%] rounded-md flex flex-col gap-[10px]">
+            {ui.userLoggedIn && <ProfileCard />}
+            <TrendingNow />
+          </div>
+        </div>
+      </div>
+
+      <div className="block lg:hidden bg-[#F4F2EE]">
+        <div className="w-[100%] mx-auto pt-[20px] rounded-md flex flex-col gap-[10px]">
+          <UploadPost />
+          <Outlet />
+        </div>
+      </div>
+
+      {/* {uiStore.userLoggedIn && currentPath !== "/" ? (
         <div className="flex md:flex-row flex-col items-start">
           <SideBar />
           <Outlet />
@@ -30,7 +57,7 @@ function AppLayout() {
         <div className="bg-[#F4F2EE]">
           <Outlet />
         </div>
-      )}
+      )} */}
       {/* 
       <div className="flex md:flex-row flex-col items-start">
         <SideBar />

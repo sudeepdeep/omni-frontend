@@ -8,7 +8,7 @@ import Logo from "../components/Logo";
 import TextField from "../components/TextField";
 import axios, { axiosErrorToast } from "../utils/axios";
 import { toast } from "react-toastify";
-import Logo_UI from "../assets/logo_ui.png";
+import Logo_UI from "../assets/B.png";
 import {
   CorrectIcon,
   ShowOffIcon,
@@ -16,6 +16,10 @@ import {
   WrongIcon,
 } from "../assets/Icons";
 import GoogleAuth from "../components/GoogleAuth";
+import { AnimationLoading } from "../components/Loading";
+import buttonLoading from "../assets/buttonloading.json";
+
+import UIStore from "../Store";
 
 // Define a type for userData
 interface UserData {
@@ -23,6 +27,8 @@ interface UserData {
   password: string;
   repassword: string;
   email: string;
+  firstName: string;
+  lastName: string;
 }
 
 const Register: React.FC = () => {
@@ -30,6 +36,10 @@ const Register: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [userAvailable, setUserAvailable] = useState<boolean | null>(null);
+  const [userAvailableLoading, setUserAvailableLoading] = useState<
+    boolean | null
+  >(null);
+
   const existingUser = Cookies.get("token");
 
   // Define state with typed user data
@@ -38,6 +48,8 @@ const Register: React.FC = () => {
     password: "",
     repassword: "",
     email: "",
+    firstName: "",
+    lastName: "",
   });
 
   // If a token exists, remove it (this ensures a fresh state)
@@ -50,10 +62,18 @@ const Register: React.FC = () => {
 
   // Check if the username is available
   useEffect(() => {
+    const delay = 2000; // 5 seconds delay
+    let handler: NodeJS.Timeout;
     if (userData.username.length > 5) {
-      handleCheckUsernameAvailable(userData.username);
+      setUserAvailableLoading(true);
+      handler = setTimeout(() => {
+        handleCheckUsernameAvailable(userData.username);
+      }, delay);
     }
     setUserAvailable(null);
+    return () => {
+      clearTimeout(handler); // Clear timeout if user keeps typing
+    };
   }, [userData.username]);
 
   // Registration logic
@@ -70,10 +90,18 @@ const Register: React.FC = () => {
         username: userData.username,
         password: userData.password,
         email: userData.email,
-        applicationType: "unilinks",
+        firstName: userData.firstName,
+        lastName: userData.lastName,
       })
       .then((res) => {
         setLoading(false);
+
+        UIStore.update((s) => {
+          s.userLoggedIn = true;
+          s.username = userData.username;
+          s.userId = res.data.userId;
+        });
+
         console.log(res.data, "responsedata");
         Cookies.set("username", userData.username);
         Cookies.set("token", res.data.access_token);
@@ -90,8 +118,10 @@ const Register: React.FC = () => {
   const handleCheckUsernameAvailable = (username: string) => {
     axios.get(`/user/${username}/check-username`).then((res) => {
       if (res.data.success === "true") {
+        setUserAvailableLoading(false);
         setUserAvailable(true);
       } else {
+        setUserAvailableLoading(false);
         setUserAvailable(false);
       }
     });
@@ -112,7 +142,7 @@ const Register: React.FC = () => {
               alt="logo"
               width="80"
               height="80"
-              className="mx-auto"
+              className="mx-auto rounded-full"
             />
             {/* <Lottie animationData={bgImg} loop={true} autoplay={true} /> */}
           </div>
@@ -122,6 +152,34 @@ const Register: React.FC = () => {
             </span>
           </div>
           <div className="w-[300px] bg-[#161B22] md:p-3 rounded-md flex flex-col gap-2">
+            <TextField
+              name="firstName"
+              type="text"
+              title="Enter First Name"
+              onChange={(e) =>
+                setUserData({
+                  ...userData,
+                  firstName: e,
+                })
+              }
+              value={userData.firstName}
+              sx={"bg-transparent"}
+            />
+
+            <TextField
+              name="lastName"
+              type="email"
+              title="Enter Last Name"
+              onChange={(e) =>
+                setUserData({
+                  ...userData,
+                  lastName: e,
+                })
+              }
+              value={userData.lastName}
+              sx={"bg-transparent"}
+            />
+
             <TextField
               name="username"
               title="Enter Username"
@@ -134,7 +192,12 @@ const Register: React.FC = () => {
               value={userData.username}
               sx={"bg-transparent"}
               onIcon={
-                userAvailable === true ? (
+                userAvailableLoading == true ? (
+                  <AnimationLoading
+                    animation={buttonLoading}
+                    styles="w-[70px]"
+                  />
+                ) : userAvailable === true ? (
                   <CorrectIcon />
                 ) : (
                   userAvailable === false && <WrongIcon />

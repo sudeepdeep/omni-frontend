@@ -4,14 +4,20 @@ import AppLayout from "./layout/AppLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { UIStore } from "./Store";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Success from "./pages/Success";
 import Logout from "./pages/Logout";
+import StockPage from "./pages/StockPage";
+import Politics from "./pages/Politics";
+import Finance from "./pages/Finance";
+import World from "./pages/World";
+import Country from "./pages/Country";
+import State from "./pages/State";
+import CommonLand from "./pages/CommonLand";
+import UserEditPage from "./pages/UserEditPage";
+import NewsPage from "./pages/NewsPage";
 
 function App() {
-  const uiStore = UIStore.useState();
-
   const appRouter = createBrowserRouter([
     {
       path: "/",
@@ -21,7 +27,40 @@ function App() {
           path: "/",
           element: <Home />,
         },
+        {
+          path: "/stocks/:type",
+          element: <StockPage />,
+        },
+        {
+          path: "/politics/:type",
+          element: <Politics />,
+        },
+        {
+          path: "/finance/:type",
+          element: <Finance />,
+        },
+        {
+          path: "/world",
+          element: <CommonLand />,
+        },
+        {
+          path: "/country",
+          element: <CommonLand />,
+        },
+        {
+          path: "/state",
+          element: <Home />,
+        },
       ],
+    },
+    {
+      path: "/:userId/edit",
+      element: <UserEditPage />,
+    },
+
+    {
+      path: "/:id/news",
+      element: <NewsPage />,
     },
     {
       path: "login",

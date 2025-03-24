@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
-import { UIStore } from "../Store";
+import UIStore from "../Store";
 import { Button } from "./Button";
 import BgImg from "../assets/gray-textured-wall.jpg";
 import {
