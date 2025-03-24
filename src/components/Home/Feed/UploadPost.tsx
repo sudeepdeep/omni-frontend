@@ -68,7 +68,7 @@ function UploadPost() {
     <div className="h-[15vh] w-[95%] mx-auto bg-white p-[10px] rounded-lg">
       <p
         onClick={handleOpenPopup}
-        className="w-[80%] mx-auto text-gray-500 cursor-pointer border-2 h-[40px] rounded-xl flex justify-start pl-[10px] items-center"
+        className="md:w-[80%] w-[100%] mx-auto text-gray-500 cursor-pointer border-2 h-[40px] rounded-xl flex justify-start pl-[10px] items-center"
       >
         Create News
       </p>

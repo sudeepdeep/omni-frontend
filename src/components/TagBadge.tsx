@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AlertTriangle, Flame, Clock, Star, FileText } from "lucide-react";
 
 interface TagBadgeProps {
@@ -15,6 +15,16 @@ const tagStyles: Record<
     text: "text-white",
   },
   trending: {
+    icon: <Flame size={16} />,
+    bg: "bg-orange-500",
+    text: "text-white",
+  },
+  "Breaking News": {
+    icon: <AlertTriangle size={16} />,
+    bg: "bg-red-500",
+    text: "text-white",
+  },
+  "Trending News": {
     icon: <Flame size={16} />,
     bg: "bg-orange-500",
     text: "text-white",
@@ -51,6 +61,38 @@ const TagBadge: React.FC<TagBadgeProps> = ({ tag }) => {
       {style.icon}
       {tag.charAt(0).toUpperCase() + tag.slice(1)}
     </span>
+  );
+};
+
+export const TagBadge2: React.FC<{
+  tag: string;
+  selectedTag: string | null;
+  handleClick: (tag: string) => void;
+}> = ({ tag, selectedTag, handleClick }) => {
+  const style = tagStyles[tag] || tagStyles.default;
+  let isSelected = selectedTag === tag;
+
+  function handleCheckClick(tag: any) {
+    if (selectedTag == tag) {
+      isSelected = false;
+      handleClick("");
+    } else {
+      handleClick(tag);
+    }
+  }
+
+  return (
+    <div
+      className={`rounded-full p-1 ${isSelected ? "border-[3px]" : "border-0"}`}
+    >
+      <span
+        onClick={() => handleCheckClick(tag)}
+        className={`inline-flex items-center gap-1 px-2 py-2 rounded-full text-xs font-medium cursor-pointer ${style.bg} ${style.text}`}
+      >
+        {style.icon}
+        {tag}
+      </span>
+    </div>
   );
 };
 

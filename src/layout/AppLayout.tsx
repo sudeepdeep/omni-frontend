@@ -10,6 +10,7 @@ import ProfileCard from "../components/Home/ProfileCard";
 import TrendingNow from "../components/Home/TrendingNow";
 import { checkUserLoggedIn } from "../utils/service";
 import UIStore from "../Store";
+import { TagBadge2 } from "../components/TagBadge";
 
 function AppLayout() {
   const currentPath = window.location.pathname;
@@ -20,6 +21,15 @@ function AppLayout() {
     }
   }, []);
   const ui = UIStore.useState();
+  const [newsType, setNewsType] = useState("");
+
+  function handleClick(e: any) {
+    if (e) {
+      setNewsType(e);
+    } else {
+      setNewsType("");
+    }
+  }
   return (
     <div className="min-h-[100vh] h-auto  font-poppins">
       <Navbar />
@@ -44,6 +54,24 @@ function AppLayout() {
       <div className="block lg:hidden bg-[#F4F2EE]">
         <div className="w-[100%] mx-auto pt-[20px] rounded-md flex flex-col gap-[10px]">
           <UploadPost />
+          <div className="w-[100%] lg:hidden flex justify-center gap-3 mt-1">
+            {["Breaking News", "Trending News"].map((item: any) => (
+              <div className="w-[auto]">
+                <TagBadge2
+                  tag={item}
+                  selectedTag={newsType}
+                  handleClick={handleClick}
+                />
+              </div>
+            ))}
+          </div>
+          <div>
+            {newsType === "Breaking News" ? (
+              <BreakingNews />
+            ) : (
+              newsType === "Trending News" && <TrendingNow />
+            )}
+          </div>
           <Outlet />
         </div>
       </div>

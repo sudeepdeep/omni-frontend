@@ -17,7 +17,7 @@ function BreakingNews() {
     }
   }, [feed]);
   return (
-    <div className="h-[70vh] w-fullrounded-md overflow-hidden p-[10px]">
+    <div className="lg:h-[70vh] h-auto w-fullrounded-md overflow-hidden p-[10px]">
       <span>
         <b>
           <span className="text-red-500">BREAKING NEWS</span>{" "}
@@ -25,7 +25,7 @@ function BreakingNews() {
         </b>
       </span>
       <div className="overflow-hidden">
-        <div className="animate-marquee-vertical-breaking">
+        <div className="animate-marquee-vertical">
           {allNews.map((newss: any) => (
             <NewsCard news={newss} />
           ))}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios, { axiosErrorToast } from "../utils/axios";
 import FeedPost, { FeedPost2 } from "../components/Home/Feed/FeedPost";
 import { Share2Icon, ShareIcon } from "lucide-react";
+import { toast } from "react-toastify";
 
 function NewsPage() {
   let { id } = useParams();
@@ -26,7 +27,7 @@ function NewsPage() {
     navigator.clipboard
       .writeText(window.location.href)
       .then(() => {
-        console.log("URL copied to clipboard!");
+        toast.success("URL copied to clipboard!");
       })
       .catch((err) => {
         console.error("Failed to copy URL: ", err);
@@ -34,15 +35,29 @@ function NewsPage() {
   }
 
   return (
-    <div className="bg-[#F4F2EE] w-[100%] h-auto p-5">
-      <div className="w-[50%]  h-auto mx-auto">
+    <div className="bg-[#F4F2EE] w-[100%] h-auto md:p-5 p-0">
+      <div className="md:w-[50%] w-[100%]  h-auto mx-auto">
         {Object.keys(post).length > 0 && (
-          <div className="flex gap-3">
-            <FeedPost2 news={post} />
-            <div className="cursor-pointer" onClick={handleCopyUrl}>
-              <Share2Icon />
+          <>
+            <div className="gap-3 md:flex hidden">
+              <FeedPost2 news={post} />
+              <div className="cursor-pointer" onClick={handleCopyUrl}>
+                <Share2Icon />
+              </div>
             </div>
-          </div>
+
+            <div className="gap-3 md:hidden relative">
+              <div>
+                <FeedPost2 news={post} />
+              </div>
+              <div
+                className="absolute bottom-6 right-6 cursor-pointer"
+                onClick={handleCopyUrl}
+              >
+                <Share2Icon />
+              </div>
+            </div>
+          </>
         )}
       </div>
     </div>

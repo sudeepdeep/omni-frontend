@@ -97,7 +97,7 @@ function Navbar() {
       ),
       subMenu: ui.userLoggedIn && [
         {
-          url: `.${ui.username}`,
+          url: `/${ui.userId}/edit`,
           text: ui.username,
           param: "",
         },
@@ -169,7 +169,7 @@ function Navbar() {
                 </>
               ) : (
                 <a
-                  href={navItem.url}
+                  href={navItem.url + "?page=" + navItem.param}
                   className={`block px-4 py-2 hover:text-blue-500 lg:py-0 ${
                     location.pathname === navItem.url
                       ? "text-blue-500 font-bold"
