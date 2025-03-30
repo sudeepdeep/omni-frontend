@@ -15,11 +15,11 @@ root.render(
   <>
     <ToastContainer />
     <Helmet
-      appTitle="HOME | UNILINKS"
+      appTitle="HOME | CIVIC REPORTS"
       favicon={
-        "https://firebasestorage.googleapis.com/v0/b/woid-582b2.appspot.com/o/snapnews.png?alt=media&token=ecf9f9ce-cc18-4035-8f44-ba7339640204"
+        "https://firebasestorage.googleapis.com/v0/b/woid-582b2.appspot.com/o/CIVIC.png?alt=media&token=534afc5b-61d5-4636-9403-3f3ec4a4b439"
       }
-      description="UniLinks is the ultimate solution for managing your digital identity. With one personalized link, you can share all your social media profiles, websites, and online connections seamlessly. Perfect for influencers, professionals, and individuals, LinkConnect simplifies how you connect online. Build your unique profile and make it easier for others to find and follow you across multiple platforms. Start creating your all-in-one social media hub today and never miss an opportunity to grow your online presence."
+      description="Civic Reports is a dynamic news platform where users can log in, create, and share news stories across various categories, including Local, State, National, World, Business, Stocks, and Politics. Whether you're reporting breaking news, sharing insights, or keeping up with global trends, our platform empowers you to be part of the conversation. With seamless news posting, bookmarking features, and an interactive community, Civic Reports ensures that news is not just consumed but also contributed by the people. Stay informed, share your perspective, and engage with news that matters to you!"
     />
     <QueryClientProvider client={queryClient}>
       <App />
