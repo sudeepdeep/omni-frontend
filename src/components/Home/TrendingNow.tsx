@@ -22,7 +22,7 @@ function TrendingNow() {
       <span>
         <b>
           <span className="text-red-500">TRENDING NEWS</span>{" "}
-          <span>BY CIVILNEWS</span>
+          <span>BY CIVIC REPORTS</span>
         </b>
       </span>
       <div className="overflow-hidden">

@@ -14,7 +14,7 @@ const axios = Axios.create({
     process.env.REACT_APP_API_HOST ?? "https://omni-backend-lake.vercel.app",
   headers: {
     Authorization: `Bearer ${token}`,
-    Application: "unilinks",
+    Application: "civicreportss",
   },
 });
 

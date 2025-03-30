@@ -13,10 +13,10 @@ function PrivacyPolicy() {
           <strong>Last Updated: 29/03/25</strong>
         </p>
         <p className="p">
-          Welcome to CIVILNEWS! At CIVILNEWS (“we,” “us,” or “our”), we are
-          committed to protecting your privacy. This Privacy Policy describes
-          how we collect, use, and share your personal information when you use
-          our website and services (the “Service”).
+          Welcome to CIVIC REPORTS! At CIVIC REPORTS (“we,” “us,” or “our”), we
+          are committed to protecting your privacy. This Privacy Policy
+          describes how we collect, use, and share your personal information
+          when you use our website and services (the “Service”).
         </p>
 
         <h2>1. Information We Collect</h2>

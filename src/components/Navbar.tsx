@@ -14,9 +14,13 @@ function Navbar() {
   console.log(ui);
 
   const navList = [
-    { url: "/", text: "Local", param: "local&appName=civilnews" },
-    { url: "/state", text: "State", param: "state&appName=civilnews" },
-    { url: "/country", text: "Country", param: "national&appName=civilnews" },
+    { url: "/", text: "Local", param: "local&appName=civicreports" },
+    { url: "/state", text: "State", param: "state&appName=civicreports" },
+    {
+      url: "/country",
+      text: "Country",
+      param: "national&appName=civicreports",
+    },
     { url: "/world", text: "World", param: "international&appName=combined" },
     {
       url: "/stocks",
@@ -57,7 +61,7 @@ function Navbar() {
         {
           url: "/politics/national",
           text: "National",
-          param: "politics&subPage=national&appName=civilnews",
+          param: "politics&subPage=national&appName=civicreports",
         },
         {
           url: "/politics/international",
@@ -109,7 +113,7 @@ function Navbar() {
   return (
     <header className="w-[85%] h-[10vh] bg-white flex mx-auto">
       <div className="container mx-auto flex justify-between items-center px-4 py-2">
-        <div className="text-lg font-bold">CIVILNEWS</div>
+        <div className="text-lg font-bold">CIVIC REPORTS</div>
         <button
           className="lg:hidden text-2xl"
           onClick={toggleMenu}

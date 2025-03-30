@@ -7,7 +7,7 @@ function TermsOfService() {
     <div className="bg-white text-black">
       <div className="md:w-[50%] w-[100%] p-[10px] m-auto pt-[40px]">
         <div className="flex justify-center">
-          <img width={40} src={logUI} alt="CIVILNEWS Logo" />
+          <img width={40} src={logUI} alt="CIVIC REPORTS Logo" />
         </div>
         <h1 className="text-center">Terms of Service</h1>
         <p className="p text-center">
@@ -16,9 +16,9 @@ function TermsOfService() {
 
         <h2>1. Acceptance of Terms</h2>
         <p>
-          By accessing or using CIVILNEWS ("we," "us," or "our"), you agree to
-          comply with these Terms of Service. If you do not agree, please do not
-          use our Service.
+          By accessing or using CIVIC REPORTS ("we," "us," or "our"), you agree
+          to comply with these Terms of Service. If you do not agree, please do
+          not use our Service.
         </p>
 
         <h2>2. User Accounts</h2>
@@ -43,8 +43,8 @@ function TermsOfService() {
         <h2>4. Content Ownership and Usage</h2>
         <p>
           Users retain ownership of the content they post. However, by posting
-          on CIVILNEWS, you grant us a non-exclusive license to use, modify, and
-          distribute your content within our platform.
+          on CIVIC REPORTS, you grant us a non-exclusive license to use, modify,
+          and distribute your content within our platform.
         </p>
 
         <h2>5. Third-Party Links</h2>

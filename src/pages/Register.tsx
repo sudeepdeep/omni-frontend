@@ -142,9 +142,9 @@ const Register: React.FC = () => {
           <div className="text-center">
             <p className="font-extrabold tracking-wide text-4xl">
               <span className="bg-gradient-to-r from-[#1DB954] to-[#16A34A] text-transparent bg-clip-text drop-shadow-md">
-                CIVIL
+                CIVIC
               </span>
-              <span className="md:text-black text-white"> NEWS</span>
+              <span className="md:text-black text-white"> REPORTS</span>
             </p>
 
             <p className="text-[10px]">From Local Streets to Global Beats</p>
@@ -171,7 +171,7 @@ const Register: React.FC = () => {
           </div>
           <div className="md:w-[60%] w-[80%] md:p-3 rounded-md flex flex-col gap-2">
             <div className="flex w-full font-bold text-[12px]">
-              <p className="text-xl">Sign up to CIVIL NEWS</p>
+              <p className="text-xl">Sign up to CIVIC REPORTS</p>
             </div>
             <TextField2
               name="firstName"
@@ -280,7 +280,7 @@ const Register: React.FC = () => {
             <a href="/privacy-policy" className="text-[#1DB954d9]">
               Terms of Service
             </a>
-            . For more information about CIVILNEWS privacy practices. We'll
+            . For more information about CIVIC REPORTS privacy practices. We'll
             occasionally send you account-related emails.
           </p>
         </div>

@@ -7,7 +7,7 @@ function CommunityGuidelines() {
     <div className="bg-white text-black">
       <div className="md:w-[50%] w-[100%] p-[10px] m-auto pt-[40px]">
         <div className="flex justify-center">
-          <img width={40} src={logUI} alt="CIVILNEWS Logo" />
+          <img width={40} src={logUI} alt="CIVIC REPORTS Logo" />
         </div>
         <h1 className="text-center">Community Guidelines</h1>
         <p className="p text-center">
