@@ -16,6 +16,9 @@ import State from "./pages/State";
 import CommonLand from "./pages/CommonLand";
 import UserEditPage from "./pages/UserEditPage";
 import NewsPage from "./pages/NewsPage";
+import TermsOfService from "./pages/TermsOfService";
+import CommunityGuidelines from "./pages/CommunityGuidelines";
+import About from "./pages/About";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -81,6 +84,18 @@ function App() {
     {
       path: "privacy-policy",
       element: <PrivacyPolicy />,
+    },
+    {
+      path: "community-guidelines",
+      element: <CommunityGuidelines />,
+    },
+    {
+      path: "about-us",
+      element: <About />,
+    },
+    {
+      path: "terms-of-service",
+      element: <TermsOfService />,
     },
     {
       path: "success",

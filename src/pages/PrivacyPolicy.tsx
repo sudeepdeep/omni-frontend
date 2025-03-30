@@ -1,15 +1,19 @@
 import React from "react";
 import "../../src/index.css";
+import logUI from "../assets/CIVIC.png";
 function PrivacyPolicy() {
   return (
-    <div className="bg-black text-white">
-      <div className=" w-[50%] m-auto pt-[40px]">
-        <h1>Privacy Policy</h1>
-        <p className="p">
-          <strong>Last Updated: 26/10/24</strong>
+    <div className="bg-white text-black">
+      <div className=" md:w-[50%] w-[100%] p-[10px] m-auto pt-[40px]">
+        <div className="flex justify-center">
+          <img width={40} src={logUI} />
+        </div>
+        <h1 className="text-center">Privacy Policy</h1>
+        <p className="p text-center">
+          <strong>Last Updated: 29/03/25</strong>
         </p>
         <p className="p">
-          Welcome to UNILINKS! At UNILINKS (“we,” “us,” or “our”), we are
+          Welcome to CIVILNEWS! At CIVILNEWS (“we,” “us,” or “our”), we are
           committed to protecting your privacy. This Privacy Policy describes
           how we collect, use, and share your personal information when you use
           our website and services (the “Service”).

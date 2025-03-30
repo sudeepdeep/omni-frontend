@@ -18,11 +18,11 @@ function TrendingNow() {
     }
   }, [feed]);
   return (
-    <div className="h-[35vh] p-[10px] rounded-md overflow-hidden">
+    <div className="h-auto p-[10px] rounded-md overflow-hidden">
       <span>
         <b>
           <span className="text-red-500">TRENDING NEWS</span>{" "}
-          <span>BY OMNIBLOGS</span>
+          <span>BY CIVILNEWS</span>
         </b>
       </span>
       <div className="overflow-hidden">

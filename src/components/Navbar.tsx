@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import UIStore from "../Store";
 import { useLocation } from "react-router-dom";
+import DefaultImage from "./DefaultImage";
 
 function Navbar() {
   const location = useLocation();
@@ -13,9 +14,9 @@ function Navbar() {
   console.log(ui);
 
   const navList = [
-    { url: "/", text: "Local", param: "local&appName=omniblogs" },
-    { url: "/state", text: "State", param: "state&appName=omniblogs" },
-    { url: "/country", text: "Country", param: "national&appName=omniblogs" },
+    { url: "/", text: "Local", param: "local&appName=civilnews" },
+    { url: "/state", text: "State", param: "state&appName=civilnews" },
+    { url: "/country", text: "Country", param: "national&appName=civilnews" },
     { url: "/world", text: "World", param: "international&appName=combined" },
     {
       url: "/stocks",
@@ -56,7 +57,7 @@ function Navbar() {
         {
           url: "/politics/national",
           text: "National",
-          param: "politics&subPage=national&appName=omniblogs",
+          param: "politics&subPage=national&appName=civilnews",
         },
         {
           url: "/politics/international",
@@ -77,20 +78,7 @@ function Navbar() {
             />
           </>
         ) : (
-          <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-            <svg
-              className="absolute w-12 h-12 text-gray-400 -left-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </div>
+          <DefaultImage />
         )
       ) : (
         "Login"
@@ -121,7 +109,7 @@ function Navbar() {
   return (
     <header className="w-[85%] h-[10vh] bg-white flex mx-auto">
       <div className="container mx-auto flex justify-between items-center px-4 py-2">
-        <div className="text-lg font-bold">OMNIBLOGS</div>
+        <div className="text-lg font-bold">CIVILNEWS</div>
         <button
           className="lg:hidden text-2xl"
           onClick={toggleMenu}

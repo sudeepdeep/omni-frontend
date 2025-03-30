@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import bgImg from "../assets/earth.json";
 import { Button } from "../components/Button";
 import Logo from "../components/Logo";
-import TextField from "../components/TextField";
+import TextField, { TextField2 } from "../components/TextField";
 import axios, { axiosErrorToast } from "../utils/axios";
 import { toast } from "react-toastify";
-import Logo_UI from "../assets/B.png";
+import Logo_UI2 from "../assets/CIVIC.png";
+
 import {
   CorrectIcon,
   ShowOffIcon,
@@ -78,11 +79,6 @@ const Register: React.FC = () => {
 
   // Registration logic
   const handleRegister = () => {
-    if (userData.password !== userData.repassword) {
-      toast.error("Passwords did not match");
-      return;
-    }
-
     setLoading(true);
 
     axios
@@ -134,59 +130,84 @@ const Register: React.FC = () => {
 
   return (
     <>
-      <div className="w-full min-h-[100vh] h-auto flex justify-center md:bg-black bg-[#161B22] pt-2">
-        <div className="authCard w-[300px]">
-          <div className="w-[150px] mx-auto">
-            <img
-              src={Logo_UI}
-              alt="logo"
-              width="80"
-              height="80"
-              className="mx-auto rounded-full"
-            />
-            {/* <Lottie animationData={bgImg} loop={true} autoplay={true} /> */}
+      <div className="main min-h-[100vh] w-full h-auto flex flex-col md:flex-row">
+        <div className="left flex w-full md:w-[50%] h-[400px] md:h-auto bg-black md:bg-transparent text-white md:text-black md:flex-col flex-col-reverse justify-center md:justify-center md:items-center">
+          <div className=" flex flex-col items-center md:pt-[0px] pt-[80px]">
+            <p className="md:text-2xl text-[15px]">
+              Create your <span className="text-[#1DB954d9]">free</span> account
+            </p>
+            <p className=" text-[12px]">& stay updated.</p>
           </div>
-          <div className="logo pb-3">
-            <span className="flex gap-1 justify-center text-white">
-              Welcome to <Logo />
-            </span>
+          <img className="hidden md:block h-[30vh]" src={Logo_UI2} />
+          <div className="text-center">
+            <p className="font-extrabold tracking-wide text-4xl">
+              <span className="bg-gradient-to-r from-[#1DB954] to-[#16A34A] text-transparent bg-clip-text drop-shadow-md">
+                CIVIL
+              </span>
+              <span className="md:text-black text-white"> NEWS</span>
+            </p>
+
+            <p className="text-[10px]">From Local Streets to Global Beats</p>
           </div>
-          <div className="w-[300px] bg-[#161B22] md:p-3 rounded-md flex flex-col gap-2">
-            <TextField
+        </div>
+        <div className="md:hidden relative h-[10vh] w-full">
+          <img
+            className="absolute left-[35%] bottom-[45%]"
+            width={100}
+            src={Logo_UI2}
+          />
+        </div>
+        <div className="right w-full md:w-[50%] flex flex-col justify-center items-center md:mt-[0px] mt-[30px]">
+          <div className="w-full h-auto md:text-right text-center md:mr-[20px] md:mb-[0px] mb-[20px]">
+            <h4 className="font-normal text-black">
+              Already have an account?{" "}
+              <span
+                className="text-[#1DB954] cursor-pointer"
+                onClick={() => navigate("/login")}
+              >
+                Sign in ➞
+              </span>
+            </h4>
+          </div>
+          <div className="md:w-[60%] w-[80%] md:p-3 rounded-md flex flex-col gap-2">
+            <div className="flex w-full font-bold text-[12px]">
+              <p className="text-xl">Sign up to CIVIL NEWS</p>
+            </div>
+            <TextField2
               name="firstName"
               type="text"
               title="Enter First Name"
-              onChange={(e) =>
+              onChange={(e: any) =>
                 setUserData({
                   ...userData,
-                  firstName: e,
+                  firstName: e.target.value,
                 })
               }
               value={userData.firstName}
               sx={"bg-transparent"}
             />
 
-            <TextField
+            <TextField2
               name="lastName"
               type="email"
               title="Enter Last Name"
-              onChange={(e) =>
+              onChange={(e: any) =>
                 setUserData({
                   ...userData,
-                  lastName: e,
+                  lastName: e.target.value,
                 })
               }
               value={userData.lastName}
               sx={"bg-transparent"}
             />
 
-            <TextField
+            <TextField2
               name="username"
               title="Enter Username"
-              onChange={(e) =>
+              onChange={(e: any) =>
                 setUserData({
                   ...userData,
-                  username: e,
+                  username: e.target.value,
                 })
               }
               value={userData.username}
@@ -210,49 +231,33 @@ const Register: React.FC = () => {
               }
             />
 
-            <TextField
+            <TextField2
               name="email"
               type="email"
               title="Enter Email"
-              onChange={(e) =>
+              onChange={(e: any) =>
                 setUserData({
                   ...userData,
-                  email: e,
+                  email: e.target.value,
                 })
               }
               value={userData.email}
               sx={"bg-transparent"}
             />
 
-            <TextField
+            <TextField2
               name="password"
               type="password"
               title="Enter Password"
-              onChange={(e) =>
+              onChange={(e: any) =>
                 setUserData({
                   ...userData,
-                  password: e,
+                  password: e.target.value,
                 })
               }
               onIcon={<ShowOnIcon />}
               offIcon={<ShowOffIcon />}
               value={userData.password}
-              sx={"bg-transparent"}
-            />
-
-            <TextField
-              name="re-password"
-              type="password"
-              title="Re-Enter Password"
-              onChange={(e) =>
-                setUserData({
-                  ...userData,
-                  repassword: e,
-                })
-              }
-              onIcon={<ShowOnIcon />}
-              offIcon={<ShowOffIcon />}
-              value={userData.repassword}
               sx={"bg-transparent"}
             />
 
@@ -265,21 +270,19 @@ const Register: React.FC = () => {
             />
           </div>
 
-          <div className="text-white text-center my-2">OR</div>
-
-          <GoogleAuth />
-
-          <div className="h-[80px] border-2 mt-2 border-[#161B22] rounded-md flex gap-2 justify-center items-center">
-            <h4 className="font-normal text-white">
-              Already have an account?{" "}
-              <span
-                className="text-[#1DB954] cursor-pointer"
-                onClick={() => navigate("/login")}
-              >
-                Sign in ➞
-              </span>
-            </h4>
+          <div className="text-black text-center my-2">OR</div>
+          <div className="md:w-[58%] w-[78%]">
+            <GoogleAuth />
           </div>
+
+          <p className="md:w-[58%] w-[78%] text-[12px] my-[10px]">
+            By creating an account, you agree to the{" "}
+            <a href="/privacy-policy" className="text-[#1DB954d9]">
+              Terms of Service
+            </a>
+            . For more information about CIVILNEWS privacy practices. We'll
+            occasionally send you account-related emails.
+          </p>
         </div>
       </div>
     </>

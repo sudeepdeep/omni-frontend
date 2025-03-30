@@ -73,6 +73,8 @@ function AppLayout() {
             )}
           </div>
           <Outlet />
+
+          <PopularNews />
         </div>
       </div>
 

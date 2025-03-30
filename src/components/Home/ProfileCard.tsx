@@ -5,6 +5,7 @@ import UIStore, { UserDetailsStore } from "../../Store";
 import { useNavigate } from "react-router-dom";
 import { handleClearData } from "../../utils/service";
 import Cookies from "js-cookie";
+import DefaultImage from "../DefaultImage";
 
 function ProfileCard() {
   // get user details
@@ -42,23 +43,62 @@ function ProfileCard() {
   return (
     <div className="h-[50vh] bg-white rounded-md p-[10px] flex flex-col justify-around">
       <div>
-        <div className="h-[120px] flex items-center justify-center">
-          <div className="w-[120px] h-[120px] mr-[10px] overflow-hidden rounded-md">
-            <img
-              className="w-full h-full object-cover"
-              src={userDetails?.profileUrl ?? Cookies.get("profileUrl") ?? ""}
-              alt="userProfile"
-            />
+        <div className="h-auto flex flex-col">
+          <div className="w-[120px] border-2 mb-2 h-[120px] mr-[10px] overflow-hidden rounded-md">
+            {userDetails?.profileUrl === "" ? (
+              <div className="h-full w-full flex justify-center items-center">
+                <DefaultImage />
+              </div>
+            ) : (
+              <img
+                className="w-full h-full object-cover"
+                src={userDetails?.profileUrl ?? Cookies.get("profileUrl") ?? ""}
+                alt="userProfile"
+              />
+            )}
           </div>
           <div>
             <b>
               {userDetails?.firstName} {userDetails?.lastName}
             </b>
+            <p className="text-[12px] mb-1 italic text-gray-500">
+              @{userDetails.username}
+            </p>
             <p className="italic text-[12px]">{userDetails?.bio}</p>
-            <div className="flex gap-[3px] text-[10px] mt-[10px] text-gray-800">
-              <p className="">{userDetails?.role}</p>
-              <p>|</p>
-              <p>{userDetails?.dateOfJoin}</p>
+
+            <div className="mt-4">
+              <p className="text-[12px]">
+                Email:{" "}
+                <span className="font-bold text-gray-700">
+                  {userDetails.email}
+                </span>
+              </p>
+            </div>
+            <div>
+              <p className="text-[12px]">
+                Role:{" "}
+                <span className="font-bold text-gray-700">
+                  {userDetails.role}
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <p className="text-[12px]">
+                License No:{" "}
+                <span className="font-bold text-gray-700">
+                  {userDetails.licenseNo}
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <p className="text-[12px]">
+                Address:{" "}
+                <span className="font-bold text-gray-700">
+                  {userDetails.address}
+                </span>
+              </p>
             </div>
           </div>
         </div>
@@ -89,7 +129,7 @@ function ProfileCard() {
       </div>
       <p
         onClick={handleNavigateProfilePage}
-        className="border-t-2 text-center text-[12px] text-blue-300 cursor-pointer"
+        className="border-t-2 text-center text-[12px] text-[#1DB954d9] cursor-pointer"
       >
         Edit profile
       </p>

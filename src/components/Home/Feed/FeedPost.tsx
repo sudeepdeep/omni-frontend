@@ -5,7 +5,7 @@ import TagBadge from "../../TagBadge";
 
 function FeedPost({ news }: any) {
   const isHTML = (str: string) => /<\/?[a-z][\s\S]*>/i.test(str);
-
+  console.log(news);
   return (
     <div className="w-full rounded-md bg-white shadow-md mb-4 p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center">
@@ -26,7 +26,7 @@ function FeedPost({ news }: any) {
 
           <div>
             <p className="text-sm font-semibold text-gray-600">{news.author}</p>
-            <p className="text-xs text-gray-500">Journalist</p>
+            <p className="text-xs text-gray-500">{news.role}</p>
           </div>
           <div></div>
         </div>
@@ -131,7 +131,9 @@ export function FeedPost2({ news }: any) {
       {isHTML(news.content) ? (
         <span
           className="text-sm text-gray-600"
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(news.content) }}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(news?.content ?? news?.snippet),
+          }}
         />
       ) : (
         news.content

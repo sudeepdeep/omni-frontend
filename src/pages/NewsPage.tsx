@@ -4,6 +4,7 @@ import axios, { axiosErrorToast } from "../utils/axios";
 import FeedPost, { FeedPost2 } from "../components/Home/Feed/FeedPost";
 import { Share2Icon, ShareIcon } from "lucide-react";
 import { toast } from "react-toastify";
+import { convertApiItem } from "../components/Home/Feed/Feed";
 
 function NewsPage() {
   let { id } = useParams();
@@ -13,8 +14,10 @@ function NewsPage() {
     axios
       .get(`/news/${id}/news`)
       .then((res) => {
-        console.log(res);
-        setPost(res.data);
+        console.log(res.data);
+        const fetchedNews = convertApiItem(res.data);
+        console.log(fetchedNews);
+        setPost(fetchedNews);
         setLoading(false);
       })
       .catch((err) => {

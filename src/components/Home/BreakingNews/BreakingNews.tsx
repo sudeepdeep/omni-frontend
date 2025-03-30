@@ -21,7 +21,7 @@ function BreakingNews() {
       <span>
         <b>
           <span className="text-red-500">BREAKING NEWS</span>{" "}
-          <span>BY OMNIBLOGS</span>
+          <span>BY CIVILNEWS</span>
         </b>
       </span>
       <div className="overflow-hidden">

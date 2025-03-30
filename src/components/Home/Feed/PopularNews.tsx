@@ -1,36 +1,10 @@
 import React from "react";
-
-const popularNews = [
-  {
-    url: "https://www.eenadu.net/",
-    text: "Eenadu",
-    image:
-      "https://play-lh.googleusercontent.com/gjC4N6FUlFP1eGIxhoLqOZcTM-9FJda0GIx2rgFyHvmvIpzclUVKumaeLGAKNQfi-40",
-  },
-  {
-    url: "https://www.eenadu.net/",
-    text: "Sakshi",
-    image:
-      "https://cdn6.aptoide.com/imgs/1/b/0/1b0104abc950d88308c32ff6155c01d6_icon.png",
-  },
-  {
-    url: "https://www.eenadu.net/",
-    text: "Andra Jyothi",
-    image:
-      "https://images.jdmagicbox.com/comp/vijayawada/01/0866p866std3000001/catalogue/andhra-jyothi-office-gannavaram-vijayawada-newspaper-publishers-e1n33mt0bc.jpg",
-  },
-  {
-    url: "https://www.eenadu.net/",
-    text: "Vaartha",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKcQtW9uZ1c3bzn7APNkd12qSBKWZho8tgZg&s",
-  },
-];
+import LOGO_UI from "../../../assets/CIVIC.png";
 
 function PopularNews() {
   return (
-    <div className="h-[10vh]">
-      <b>Popular News Papers</b>
+    <div className="">
+      {/* <b>Popular News Papers</b>
       <div className="flex gap-[10px] flex-wrap">
         {popularNews.map((pn): any => (
           <div className="w-[50px] h-[50px] overflow-hidden rounded-lg">
@@ -41,6 +15,27 @@ function PopularNews() {
             />
           </div>
         ))}
+      </div> */}
+      <div className="flex flex-col justify-center items-center">
+        <img src={LOGO_UI} width={28} />
+        <p className="text-[10px]">© 2025 Civic Reports</p>
+        <div className="flex items-center gap-2">
+          <p className="text-[10px] text-[#1DB954d9]">
+            <a href="/about-us">About</a>
+          </p>
+          <p className="text-gray-400">|</p>
+          <p className="text-[10px] text-[#1DB954d9]">
+            <a href="/privacy-policy">Privacy</a>
+          </p>
+          <p className="text-gray-400">|</p>
+          <p className="text-[10px] text-[#1DB954d9]">
+            <a href="/terms-of-service">Terms</a>
+          </p>
+          <p className="text-gray-400">|</p>
+          <p className="text-[10px] text-[#1DB954d9]">
+            <a href="/community-guidelines">Guidelines</a>
+          </p>
+        </div>
       </div>
     </div>
   );

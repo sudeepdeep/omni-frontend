@@ -16,7 +16,7 @@ function Home() {
     if (!page || !appName) {
       const newParams = new URLSearchParams(searchParams);
       if (!page) newParams.set("page", "local");
-      if (!appName) newParams.set("appName", "omniblogs");
+      if (!appName) newParams.set("appName", "civilnews");
 
       navigate(`?${newParams.toString()}`, { replace: true });
     }

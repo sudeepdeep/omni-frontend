@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import bgImg from "../assets/earth.json";
 import { Button } from "../components/Button";
 import Logo from "../components/Logo";
-import TextField from "../components/TextField";
+import TextField, { TextField2 } from "../components/TextField";
 import axios, { axiosErrorToast } from "../utils/axios";
 import { ShowOffIcon, ShowOnIcon } from "../assets/Icons";
-import Logo_UI from "../assets/B.png";
+import Logo_UI from "../assets/CIVIC.png";
 import GoogleAuth from "../components/GoogleAuth";
 import UIStore, { UserDetailsStore } from "../Store";
 import { handleStoreUserDetails } from "../utils/service";
@@ -41,6 +41,7 @@ const Login: React.FC = () => {
         // Wait for user details to be stored before redirecting
         const data_ = await handleStoreUserDetails(res.data.userId);
         if (data_) {
+          Cookies.set("profileUrl", data_.user?.profileUrl);
           let data: any = {
             firstName: data_.user?.firstName,
             lastName: data_.user?.lastName,
@@ -84,7 +85,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-h-[100vh] h-auto flex justify-center md:bg-black bg-[#161B22] pt-2">
+    <div className="w-full min-h-[100vh] h-auto flex flex-col items-center justify-between pt-2">
       <div className="authCard w-[300px]">
         <div className="w-[150px] mx-auto">
           <img
@@ -96,26 +97,28 @@ const Login: React.FC = () => {
           />
         </div>
         <div className="logo pb-3">
-          <span className="flex gap-1 justify-center text-white">
+          <span className="flex gap-1 justify-center text-black">
             Sign in to <Logo />
           </span>
         </div>
-        <div className="w-[300px] bg-[#161B22] md:p-3 rounded-md flex flex-col gap-2">
-          <TextField
+        <div className="w-[300px] md:bg-gray-300 bg-transparent md:p-3 rounded-md flex flex-col gap-2">
+          <TextField2
             name="username"
             title="Username"
             value={username}
-            onChange={(e: string) => setUsername(e)}
+            onChange={(e: any) => setUsername(e.target.value)}
+            sx={"bg-white"}
           />
 
-          <TextField
+          <TextField2
             name="password"
             type="password"
             title="Password"
             value={password}
-            onChange={(e: string) => setPassword(e)}
+            onChange={(e: any) => setPassword(e.target.value)}
             onIcon={<ShowOnIcon />}
             offIcon={<ShowOffIcon />}
+            sx={"bg-white"}
           />
           <Button
             disabled={loading}
@@ -138,10 +141,11 @@ const Login: React.FC = () => {
           handleSubmit={() => navigate("/")}
           sx={"h-[40px] bg-transparent"}
         /> */}
-        <div className="text-white text-center my-2">OR</div>
+        <div className="text-black text-center my-2">OR</div>
+
         <GoogleAuth />
-        <div className="mt-[10px] h-[80px] border-2 border-[#161B22] rounded-md flex gap-2 justify-center items-center">
-          <h4 className="font-normal text-white ">
+        <div className="mt-[10px] h-[50px] border-2 border-[#1DB954] rounded-md flex gap-2 justify-center items-center">
+          <h4 className="font-normal text-black ">
             New user?{" "}
             <span
               className="text-[#1DB954] cursor-pointer"
@@ -152,6 +156,12 @@ const Login: React.FC = () => {
           </h4>
         </div>
       </div>
+      <a
+        href="/privacy-policy"
+        className="text-[#1DB954] text-[12px] mb-2 text-center"
+      >
+        Privacy policy
+      </a>
     </div>
   );
 };

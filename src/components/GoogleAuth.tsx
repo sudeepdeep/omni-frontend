@@ -24,6 +24,8 @@ const GoogleAuth: React.FC = () => {
   }
 
   return (
+    
+
     <GoogleOAuthProvider clientId={clientId}>
       <GoogleLogin
         onSuccess={(credentialResponse: any) => {
@@ -32,7 +34,7 @@ const GoogleAuth: React.FC = () => {
         onError={() => {
           toast.error("Login Failed");
         }}
-      />
+        />
     </GoogleOAuthProvider>
   );
 };

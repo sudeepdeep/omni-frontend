@@ -7,6 +7,23 @@ import { useSearchParams } from "react-router-dom";
 import axios from "../../../utils/axios";
 import { FeedStore } from "../../../Store";
 
+export const convertApiItem = (newsItem: any) => ({
+  title: newsItem?.title ?? "",
+  url: `/${newsItem?._id}/news`,
+  snippet: newsItem?.content ?? "",
+  content: newsItem?.content ?? "",
+  date: newsItem?.publishedDate,
+  images: newsItem?.imageUrl,
+  imageUrl: newsItem?.imageUrl,
+  author:
+    newsItem?.authorId?.firstName + " " + newsItem?.authorId?.lastName ||
+    "Author",
+  authorImage: newsItem?.authorId?.profileUrl,
+  role: newsItem?.authorId?.role ?? "user",
+  category: newsItem?.category ?? [],
+  subCategory: newsItem?.subCategory ?? [],
+});
+
 function Feed({ stocks, politics, news, finance, loading }: any) {
   console.log(politics);
   const [searchParams] = useSearchParams();
@@ -23,17 +40,6 @@ function Feed({ stocks, politics, news, finance, loading }: any) {
   const [isFetching, setIsFetching] = useState<boolean>(false); // Track if data is being fetched
 
   // Convert news items into a consistent format
-  const convertApiItem = (newsItem: any) => ({
-    title: newsItem?.title ?? "",
-    url: `/${newsItem?._id}/news`,
-    snippet: newsItem?.content ?? "",
-    date: newsItem?.publishedDate,
-    images: newsItem?.imageUrl,
-    author: newsItem?.author ?? "Author",
-    authorImage: "",
-    category: newsItem?.category ?? [],
-    subCategory: newsItem?.subCategory ?? [],
-  });
 
   const convertStocksItem = (newsItem: any) => ({
     title: newsItem?.content?.title ?? "",
