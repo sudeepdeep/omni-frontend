@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import UIStore from "../Store";
 import { useLocation } from "react-router-dom";
 import DefaultImage from "./DefaultImage";
+import Logo from "./Logo";
+import LogoUI from "../assets/CIVIC.png";
 
 function Navbar() {
   const location = useLocation();
@@ -113,7 +115,10 @@ function Navbar() {
   return (
     <header className="w-[85%] h-[10vh] bg-white flex mx-auto">
       <div className="container mx-auto flex justify-between items-center px-4 py-2">
-        <div className="text-lg font-bold">CIVIC REPORTS</div>
+        <div className="flex gap-2 items-center">
+          <img src={LogoUI} width={30} />
+          <Logo />
+        </div>
         <button
           className="lg:hidden text-2xl"
           onClick={toggleMenu}
@@ -131,10 +136,10 @@ function Navbar() {
               {navItem.subMenu ? (
                 <>
                   <div
-                    className={`block px-4 py-2 hover:text-blue-500 lg:py-0 ${
+                    className={`block px-4 py-2 hover:text-primary lg:py-0 ${
                       location.pathname === navItem.url
-                        ? "text-blue-500 font-bold"
-                        : "text-gray-600 hover:text-blue-500"
+                        ? "text-primary font-bold"
+                        : "text-gray-600 hover:text-primary"
                     }`}
                   >
                     {navItem.text}
@@ -150,8 +155,8 @@ function Navbar() {
                         href={subItem.url + "?page=" + subItem.param}
                         className={`block px-4 py-2 ${
                           location.pathname === subItem.url
-                            ? "text-blue-500 font-bold"
-                            : "text-gray-600 hover:text-blue-500"
+                            ? "text-primary font-bold"
+                            : "text-gray-600 hover:text-primary"
                         }`}
                       >
                         {subItem.text}
@@ -162,10 +167,10 @@ function Navbar() {
               ) : (
                 <a
                   href={navItem.url + "?page=" + navItem.param}
-                  className={`block px-4 py-2 hover:text-blue-500 lg:py-0 ${
+                  className={`block px-4 py-2 hover:text-primary lg:py-0 ${
                     location.pathname === navItem.url
-                      ? "text-blue-500 font-bold"
-                      : "text-gray-600 hover:text-blue-500"
+                      ? "text-primary font-bold"
+                      : "text-gray-600 hover:text-primary"
                   }`}
                 >
                   {navItem.text}

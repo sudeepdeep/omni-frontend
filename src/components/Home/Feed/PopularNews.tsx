@@ -1,5 +1,6 @@
 import React from "react";
 import LOGO_UI from "../../../assets/CIVIC.png";
+import Logo from "../../Logo";
 
 function PopularNews() {
   return (
@@ -18,21 +19,23 @@ function PopularNews() {
       </div> */}
       <div className="flex flex-col justify-center items-center">
         <img src={LOGO_UI} width={28} />
-        <p className="text-[10px]">© 2025 Civic Reports</p>
+        <p className="text-[10px]">
+          © 2025 <Logo />
+        </p>
         <div className="flex items-center gap-2">
-          <p className="text-[10px] text-[#1DB954d9]">
+          <p className="text-[10px] text-black">
             <a href="/about-us">About</a>
           </p>
           <p className="text-gray-400">|</p>
-          <p className="text-[10px] text-[#1DB954d9]">
+          <p className="text-[10px] text-black">
             <a href="/privacy-policy">Privacy</a>
           </p>
           <p className="text-gray-400">|</p>
-          <p className="text-[10px] text-[#1DB954d9]">
+          <p className="text-[10px] text-black">
             <a href="/terms-of-service">Terms</a>
           </p>
           <p className="text-gray-400">|</p>
-          <p className="text-[10px] text-[#1DB954d9]">
+          <p className="text-[10px] text-black">
             <a href="/community-guidelines">Guidelines</a>
           </p>
         </div>

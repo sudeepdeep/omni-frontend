@@ -1,15 +1,13 @@
 import Cookies from "js-cookie";
-import Lottie from "lottie-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bgImg from "../assets/earth.json";
-import { Button } from "../components/Button";
-import Logo from "../components/Logo";
-import TextField, { TextField2 } from "../components/TextField";
-import axios, { axiosErrorToast } from "../utils/axios";
-import { toast } from "react-toastify";
 import Logo_UI2 from "../assets/CIVIC.png";
+import { Button } from "../components/Button";
+import Logo, { LogoMain } from "../components/Logo";
+import { TextField2 } from "../components/TextField";
+import axios, { axiosErrorToast } from "../utils/axios";
 
+import buttonLoading from "../assets/buttonloading.json";
 import {
   CorrectIcon,
   ShowOffIcon,
@@ -18,7 +16,6 @@ import {
 } from "../assets/Icons";
 import GoogleAuth from "../components/GoogleAuth";
 import { AnimationLoading } from "../components/Loading";
-import buttonLoading from "../assets/buttonloading.json";
 
 import UIStore from "../Store";
 
@@ -131,34 +128,28 @@ const Register: React.FC = () => {
   return (
     <>
       <div className="main min-h-[100vh] w-full h-auto flex flex-col md:flex-row">
-        <div className="left flex w-full md:w-[50%] h-[400px] md:h-auto bg-black md:bg-transparent text-white md:text-black md:flex-col flex-col-reverse justify-center md:justify-center md:items-center">
+        <div className="left flex w-full md:w-[50%] h-[400px] md:h-auto bg-black relative md:bg-transparent text-white md:text-black md:flex-col flex-col-reverse justify-center md:justify-center md:items-center">
           <div className=" flex flex-col items-center md:pt-[0px] pt-[80px]">
-            <p className="md:text-2xl text-[15px]">
-              Create your <span className="text-[#1DB954d9]">free</span> account
+            <p className="md:text-[17px] text-[15px]">
+              Create your <span className="text-primary">free</span> account
             </p>
-            <p className=" text-[12px]">& stay updated.</p>
+            {/* <p className=" text-[12px]">& stay updated.</p> */}
           </div>
-          <img className="hidden md:block h-[30vh]" src={Logo_UI2} />
+          <img className="hidden md:block h-[25vh]" src={Logo_UI2} />
           <div className="text-center">
-            <p className="font-extrabold tracking-wide text-4xl">
-              <span className="bg-gradient-to-r from-[#1DB954] to-[#16A34A] text-transparent bg-clip-text drop-shadow-md">
-                CIVIC
-              </span>
-              <span className="md:text-black text-white"> REPORTS</span>
-            </p>
+            <LogoMain />
 
-            <p className="text-[10px]">From Local Streets to Global Beats</p>
+            <p className="text-[12px]">From Local Streets to Global Beats</p>
           </div>
-        </div>
-        <div className="md:hidden relative h-[10vh] w-full">
+
           <img
-            className="absolute left-[35%] bottom-[45%]"
+            className="absolute md:hidden block left-[35%] top-[87%]"
             width={100}
             src={Logo_UI2}
           />
         </div>
         <div className="right w-full md:w-[50%] flex flex-col justify-center items-center md:mt-[0px] mt-[30px]">
-          <div className="w-full h-auto md:text-right text-center md:mr-[20px] md:mb-[0px] mb-[20px]">
+          <div className="w-full mt-6 h-auto md:text-right text-center md:mr-[20px] md:mb-[0px] mb-[20px]">
             <h4 className="font-normal text-black">
               Already have an account?{" "}
               <span
@@ -171,7 +162,9 @@ const Register: React.FC = () => {
           </div>
           <div className="md:w-[60%] w-[80%] md:p-3 rounded-md flex flex-col gap-2">
             <div className="flex w-full font-bold text-[12px]">
-              <p className="text-xl">Sign up to CIVIC REPORTS</p>
+              <p className="text-xl">
+                Sign up to <Logo />
+              </p>
             </div>
             <TextField2
               name="firstName"
@@ -280,7 +273,7 @@ const Register: React.FC = () => {
             <a href="/privacy-policy" className="text-[#1DB954d9]">
               Terms of Service
             </a>
-            . For more information about CIVIC REPORTS privacy practices. We'll
+            . For more information about <Logo /> privacy practices. We'll
             occasionally send you account-related emails.
           </p>
         </div>

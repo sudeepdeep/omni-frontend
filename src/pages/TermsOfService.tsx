@@ -1,6 +1,7 @@
 import React from "react";
 import "../../src/index.css";
 import logUI from "../assets/CIVIC.png";
+import Logo from "../components/Logo";
 
 function TermsOfService() {
   return (
@@ -16,9 +17,9 @@ function TermsOfService() {
 
         <h2>1. Acceptance of Terms</h2>
         <p>
-          By accessing or using CIVIC REPORTS ("we," "us," or "our"), you agree
-          to comply with these Terms of Service. If you do not agree, please do
-          not use our Service.
+          By accessing or using <Logo /> ("we," "us," or "our"), you agree to
+          comply with these Terms of Service. If you do not agree, please do not
+          use our Service.
         </p>
 
         <h2>2. User Accounts</h2>
@@ -43,8 +44,8 @@ function TermsOfService() {
         <h2>4. Content Ownership and Usage</h2>
         <p>
           Users retain ownership of the content they post. However, by posting
-          on CIVIC REPORTS, you grant us a non-exclusive license to use, modify,
-          and distribute your content within our platform.
+          on <Logo />, you grant us a non-exclusive license to use, modify, and
+          distribute your content within our platform.
         </p>
 
         <h2>5. Third-Party Links</h2>

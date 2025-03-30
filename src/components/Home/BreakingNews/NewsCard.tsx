@@ -1,11 +1,11 @@
-import React from "react";
-import DOMPurify from "dompurify";
-
 function NewsCard({ news }: any) {
-  const isHTML = (str: string) => /<\/?[a-z][\s\S]*>/i.test(str);
   return (
     <div className="newsCard bg-white mb-2 p-[10px] rounded-md">
       <p className="text-[14px] font-semibold">{news.title}</p>
+      <p className="text-[10px]">
+        by - <i>{news.author}</i>
+      </p>
+
       {/* {isHTML(news.snippet) ? (
         <span
           className="text-sm text-gray-600"

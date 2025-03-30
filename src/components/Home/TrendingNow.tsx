@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FeedStore } from "../../Store";
 import moment from "moment";
 import NewsCard from "./BreakingNews/NewsCard";
+import Logo from "../Logo";
 
 function TrendingNow() {
   const [trendingNews, setTrendingNews] = useState<any>([]);
@@ -22,7 +23,9 @@ function TrendingNow() {
       <span>
         <b>
           <span className="text-red-500">TRENDING NEWS</span>{" "}
-          <span>BY CIVIC REPORTS</span>
+          {/* <span>
+            BY <Logo />
+          </span> */}
         </b>
       </span>
       <div className="overflow-hidden">

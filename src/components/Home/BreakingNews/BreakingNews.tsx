@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NewsCard from "./NewsCard";
 import { FeedStore } from "../../../Store";
 import moment from "moment";
+import Logo from "../../Logo";
 
 function BreakingNews() {
   const [allNews, setAllNews] = useState([]);
@@ -21,7 +22,9 @@ function BreakingNews() {
       <span>
         <b>
           <span className="text-red-500">BREAKING NEWS</span>{" "}
-          <span>BY CIVIC REPORTS</span>
+          {/* <span>
+            BY <Logo />
+          </span> */}
         </b>
       </span>
       <div className="overflow-hidden">

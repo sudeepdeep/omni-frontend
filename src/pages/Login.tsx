@@ -125,7 +125,7 @@ const Login: React.FC = () => {
             text={"Login"}
             loading={loading}
             handleSubmit={handleLogin}
-            sx={"h-[40px] bg-[#1DB954]"}
+            sx={"h-[40px] bg-primary"}
           />
           {/* <p
             onClick={() => navigate("/audio-login")}
@@ -144,11 +144,11 @@ const Login: React.FC = () => {
         <div className="text-black text-center my-2">OR</div>
 
         <GoogleAuth />
-        <div className="mt-[10px] h-[50px] border-2 border-[#1DB954] rounded-md flex gap-2 justify-center items-center">
+        <div className="mt-[10px] h-[50px] border-2 border-primary rounded-md flex gap-2 justify-center items-center">
           <h4 className="font-normal text-black ">
             New user?{" "}
             <span
-              className="text-[#1DB954] cursor-pointer"
+              className="text-primary cursor-pointer"
               onClick={() => navigate("/register")}
             >
               Create an account
@@ -156,12 +156,29 @@ const Login: React.FC = () => {
           </h4>
         </div>
       </div>
-      <a
-        href="/privacy-policy"
-        className="text-[#1DB954] text-[12px] mb-2 text-center"
-      >
-        Privacy policy
-      </a>
+      <div className="flex flex-col justify-center items-center">
+        <img src={Logo_UI} width={28} />
+        <p className="text-[10px]">
+          © 2025 <Logo />
+        </p>
+        <div className="flex items-center gap-2">
+          <p className="text-[10px] text-black">
+            <a href="/about-us">About</a>
+          </p>
+          <p className="text-gray-400">|</p>
+          <p className="text-[10px] text-black">
+            <a href="/privacy-policy">Privacy</a>
+          </p>
+          <p className="text-gray-400">|</p>
+          <p className="text-[10px] text-black">
+            <a href="/terms-of-service">Terms</a>
+          </p>
+          <p className="text-gray-400">|</p>
+          <p className="text-[10px] text-black">
+            <a href="/community-guidelines">Guidelines</a>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
