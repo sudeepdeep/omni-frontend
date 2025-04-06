@@ -143,9 +143,11 @@ const Register: React.FC = () => {
           </div>
 
           <img
-            className="absolute md:hidden block left-[35%] top-[87%]"
+            className="absolute md:hidden block left-[37%] top-[87%]"
             width={100}
-            src={Logo_UI2}
+            src={
+              "https://firebasestorage.googleapis.com/v0/b/woid-582b2.appspot.com/o/Picsart_25-04-06_18-36-03-697.png?alt=media&token=600e2f0d-056a-4ea0-8d34-8ac6768da37c"
+            }
           />
         </div>
         <div className="right w-full md:w-[50%] flex flex-col justify-center items-center md:mt-[0px] mt-[30px]">

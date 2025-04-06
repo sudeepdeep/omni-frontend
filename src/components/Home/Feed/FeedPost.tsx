@@ -5,12 +5,14 @@ import TagBadge from "../../TagBadge";
 import { useEffect, useRef, useState } from "react";
 import VerticalDrawer from "../../VerticalDrawer";
 import FeedPopup, { GenericPopUp } from "./FeedPopup";
+import Cookies from "js-cookie";
 
 function FeedPost({ news, userDetails }: any) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openArchive, setOpenArchive] = useState(false);
   const [openUnArchive, setOpenUnArchive] = useState(false);
+  let userName_ = Cookies.get("username");
   const isHTML = (str: string) => /<\/?[a-z][\s\S]*>/i.test(str);
   console.log(news, userDetails);
   const [open, setOpen] = useState(false);
@@ -75,7 +77,7 @@ function FeedPost({ news, userDetails }: any) {
           <p className="text-xs text-gray-400">
             {new Date(news.date).toDateString()}
           </p>
-          {news.username == userDetails.username && (
+          {news.username == userName_ && (
             <>
               <div className="cursor-pointer">
                 <VerticalDrawer

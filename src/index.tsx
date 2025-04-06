@@ -17,7 +17,7 @@ root.render(
     <Helmet
       appTitle="HOME | CIVIC REPORTS"
       favicon={
-        "https://firebasestorage.googleapis.com/v0/b/woid-582b2.appspot.com/o/CIVIC.png?alt=media&token=3d887a22-c033-4ecb-8fc3-768fdac4f307"
+        "https://firebasestorage.googleapis.com/v0/b/woid-582b2.appspot.com/o/Picsart_25-04-06_18-36-03-697.png?alt=media&token=600e2f0d-056a-4ea0-8d34-8ac6768da37c"
       }
       description="Civic Reports is a dynamic news platform where users can log in, create, and share news stories across various categories, including Local, State, National, World, Business, Stocks, and Politics. Whether you're reporting breaking news, sharing insights, or keeping up with global trends, our platform empowers you to be part of the conversation. With seamless news posting, bookmarking features, and an interactive community, Civic Reports ensures that news is not just consumed but also contributed by the people. Stay informed, share your perspective, and engage with news that matters to you!"
     />
