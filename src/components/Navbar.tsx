@@ -162,13 +162,9 @@ function Navbar() {
                     }`}
                   >
                     {navItem.subMenu.map((subItem) => (
-                      <p
+                      <a
                         key={subItem.text}
-                        onClick={() =>
-                          handleRoutelogin(
-                            subItem.url + "?page=" + subItem.param
-                          )
-                        }
+                        href={subItem.url + "?page=" + subItem.param}
                         className={`cursor-pointer  block px-4 py-2 ${
                           location.pathname === subItem.url
                             ? "text-primary font-bold"
@@ -176,23 +172,21 @@ function Navbar() {
                         }`}
                       >
                         {subItem.text}
-                      </p>
+                      </a>
                     ))}
                   </div>
                 </>
               ) : (
-                <p
+                <a
                   className={`block cursor-pointer px-4 py-2 hover:text-primary lg:py-0 ${
                     location.pathname === navItem.url
                       ? "text-primary font-bold"
                       : "text-gray-600 hover:text-primary"
                   }`}
-                  onClick={() =>
-                    handleRoutelogin(navItem.url + "?page=" + navItem.param)
-                  }
+                  href={navItem.url + "?page=" + navItem.param}
                 >
                   {navItem.text}
-                </p>
+                </a>
               )}
             </div>
           ))}
