@@ -106,7 +106,7 @@ const Login: React.FC = () => {
             name="username"
             title="Username"
             value={username}
-            onChange={(e: any) => setUsername(e.target.value)}
+            onChange={(e: any) => setUsername(e.target.value.toLowerCase())}
             sx={"bg-white"}
           />
 

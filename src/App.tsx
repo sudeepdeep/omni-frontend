@@ -19,8 +19,8 @@ import TermsOfService from "./pages/TermsOfService";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
 import About from "./pages/About";
 import UserPosts from "./pages/UserPosts";
+import CommonLand from "./pages/CommonLand";
 const Home = lazy(() => import("./pages/Home"));
-const CommonLand = lazy(() => import("./pages/CommonLand"));
 
 function App() {
   const appRouter = createBrowserRouter([

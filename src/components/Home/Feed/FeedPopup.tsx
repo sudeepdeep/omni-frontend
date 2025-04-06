@@ -51,16 +51,29 @@ function FeedPopup({
 
   function handleSubmitPost() {
     setLoading(true);
-    let data = {
-      title: newsData.title,
-      content: value,
-      authorId: ui.userId,
-      author: ui.username,
-      imageUrl: newsData.imageUrl,
-      category: selectedCategories,
-      subCategory: selectedSub,
-      _id: postData[0]._id,
-    };
+    let data;
+    if (type == "edit") {
+      data = {
+        title: newsData.title,
+        content: value,
+        authorId: ui.userId,
+        author: ui.username,
+        imageUrl: newsData.imageUrl,
+        category: selectedCategories,
+        subCategory: selectedSub,
+        _id: postData[0]._id,
+      };
+    } else {
+      data = {
+        title: newsData.title,
+        content: value,
+        authorId: ui.userId,
+        author: ui.username,
+        imageUrl: newsData.imageUrl,
+        category: selectedCategories,
+        subCategory: selectedSub,
+      };
+    }
     if (type == "edit") {
       axios
         .put(`/news`, data)
@@ -68,6 +81,8 @@ function FeedPopup({
           setLoading(false);
           toast.success("post updated successfully");
           console.log(res);
+          window.location.reload();
+
           closePopup();
         })
         .catch((err) => {
@@ -82,11 +97,14 @@ function FeedPopup({
           setLoading(false);
           toast.success("post created successfully");
           console.log(res);
+          window.location.reload();
           closePopup();
         })
         .catch((err) => {
           setLoading(false);
           axiosErrorToast(err);
+          window.location.reload();
+
           closePopup();
         });
     }
@@ -273,6 +291,8 @@ export function GenericPopUp({
               ? "Post UnArchived successfully"
               : "post archived successfully"
           );
+          window.location.reload();
+
           console.log(res);
           setOpen(false);
         })

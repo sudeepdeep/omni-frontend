@@ -200,7 +200,7 @@ const Register: React.FC = () => {
               onChange={(e: any) =>
                 setUserData({
                   ...userData,
-                  username: e.target.value,
+                  username: e.target.value.toLowerCase(),
                 })
               }
               value={userData.username}
