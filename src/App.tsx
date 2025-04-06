@@ -1,7 +1,6 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./layout/AppLayout";
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -13,12 +12,15 @@ import Finance from "./pages/Finance";
 import World from "./pages/World";
 import Country from "./pages/Country";
 import State from "./pages/State";
-import CommonLand from "./pages/CommonLand";
+import { lazy } from "react";
 import UserEditPage from "./pages/UserEditPage";
 import NewsPage from "./pages/NewsPage";
 import TermsOfService from "./pages/TermsOfService";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
 import About from "./pages/About";
+import UserPosts from "./pages/UserPosts";
+const Home = lazy(() => import("./pages/Home"));
+const CommonLand = lazy(() => import("./pages/CommonLand"));
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -29,6 +31,10 @@ function App() {
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: "/userposts/:userId",
+          element: <UserPosts />,
         },
         {
           path: "/stocks/:type",

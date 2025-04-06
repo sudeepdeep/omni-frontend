@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { handleClearData } from "../../utils/service";
 import Cookies from "js-cookie";
 import DefaultImage from "../DefaultImage";
+import { Edit, Edit3Icon } from "lucide-react";
 
 function ProfileCard() {
   // get user details
@@ -129,9 +130,9 @@ function ProfileCard() {
       </div>
       <p
         onClick={handleNavigateProfilePage}
-        className="border-t-2 text-center text-[12px] text-[#1DB954d9] cursor-pointer"
+        className="flex gap-2 items-center justify-center border-t-2 pt-3 text-center text-[12px] text-primary cursor-pointer"
       >
-        Edit profile
+        Edit profile <Edit className="w-4" />
       </p>
     </div>
   );

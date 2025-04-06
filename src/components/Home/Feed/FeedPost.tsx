@@ -1,11 +1,52 @@
-import React from "react";
 import DOMPurify from "dompurify";
+
 import DefaultLogo from "../../DefaultLogo";
 import TagBadge from "../../TagBadge";
+import { useEffect, useRef, useState } from "react";
+import VerticalDrawer from "../../VerticalDrawer";
+import FeedPopup, { GenericPopUp } from "./FeedPopup";
 
-function FeedPost({ news }: any) {
+function FeedPost({ news, userDetails }: any) {
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openArchive, setOpenArchive] = useState(false);
+  const [openUnArchive, setOpenUnArchive] = useState(false);
   const isHTML = (str: string) => /<\/?[a-z][\s\S]*>/i.test(str);
-  console.log(news);
+  console.log(news, userDetails);
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  function handleEdit(postData: any) {
+    console.log(postData);
+    setOpenEdit(true);
+  }
+
+  function handleArchieve() {
+    setOpenArchive(true);
+  }
+  function handleUnArchieve() {
+    setOpenUnArchive(true);
+  }
+
+  function handleDelete() {
+    console.log("calledd");
+    setOpenDelete(true);
+  }
+
+  function handleClosePopup() {
+    setOpenEdit(false);
+  }
+
   return (
     <div className="w-full rounded-md bg-white shadow-md mb-4 p-4 flex flex-col gap-2">
       <div className="flex justify-between items-center">
@@ -30,9 +71,24 @@ function FeedPost({ news }: any) {
           </div>
           <div></div>
         </div>
-        <p className="text-xs text-gray-400">
-          {new Date(news.date).toDateString()}
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="text-xs text-gray-400">
+            {new Date(news.date).toDateString()}
+          </p>
+          {news.username == userDetails.username && (
+            <>
+              <div className="cursor-pointer">
+                <VerticalDrawer
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                  handleArchive={handleArchieve}
+                  handleUnArchive={handleUnArchieve}
+                  postData={news}
+                />
+              </div>
+            </>
+          )}
+        </div>
       </div>
       <h2 className="text-md font-bold text-gray-800">{news.title}</h2>
       {isHTML(news.snippet) ? (
@@ -92,6 +148,48 @@ function FeedPost({ news }: any) {
       >
         Read more
       </a>
+      {openEdit && (
+        <FeedPopup
+          handleClosePopup={handleClosePopup}
+          postData={[news]}
+          type="edit"
+        />
+      )}
+      {openDelete && (
+        <GenericPopUp
+          postData={[news]}
+          open={openDelete}
+          setOpen={setOpenDelete}
+          title="Delete post"
+          description="Are you sure you want to delete the post?"
+          buttonText="Delete"
+          type="delete"
+        />
+      )}
+
+      {openArchive && (
+        <GenericPopUp
+          postData={[news]}
+          open={openArchive}
+          setOpen={setOpenArchive}
+          title="Archive post"
+          description="Are you sure you want to Archive the post?"
+          buttonText="Archive"
+          type="archive"
+        />
+      )}
+
+      {openUnArchive && (
+        <GenericPopUp
+          postData={[news]}
+          open={openUnArchive}
+          setOpen={setOpenUnArchive}
+          title="UnArchive post"
+          description="Are you sure you want to UnArchive the post?"
+          buttonText="UnArchive"
+          type="unarchive"
+        />
+      )}
     </div>
   );
 }
@@ -126,6 +224,15 @@ export function FeedPost2({ news }: any) {
           <div></div>
         </div>
         <p className="text-xs text-gray-400">{news.publishedDate}</p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#e8eaed"
+        >
+          <path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+        </svg>
       </div>
       <h2 className="text-md font-bold text-gray-800">{news.title}</h2>
       {isHTML(news.content) ? (

@@ -11,6 +11,7 @@ import TrendingNow from "../components/Home/TrendingNow";
 import { checkUserLoggedIn } from "../utils/service";
 import UIStore from "../Store";
 import { TagBadge2 } from "../components/TagBadge";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 function AppLayout() {
   const currentPath = window.location.pathname;
@@ -42,7 +43,9 @@ function AppLayout() {
           </div>
           <div className="md:w-[60%] w-[100%] rounded-md flex flex-col gap-[10px]">
             <UploadPost />
-            <Outlet />
+            <ErrorBoundary>
+              <Outlet />
+            </ErrorBoundary>
           </div>
           <div className="md:w-[20%] w-[100%] rounded-md flex flex-col gap-[10px]">
             {ui.userLoggedIn && <ProfileCard />}
@@ -72,27 +75,13 @@ function AppLayout() {
               newsType === "Trending News" && <TrendingNow />
             )}
           </div>
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
 
           <PopularNews />
         </div>
       </div>
-
-      {/* {uiStore.userLoggedIn && currentPath !== "/" ? (
-        <div className="flex md:flex-row flex-col items-start">
-          <SideBar />
-          <Outlet />
-        </div>
-      ) : (
-        <div className="bg-[#F4F2EE]">
-          <Outlet />
-        </div>
-      )} */}
-      {/* 
-      <div className="flex md:flex-row flex-col items-start">
-        <SideBar />
-        <Outlet />
-      </div> */}
     </div>
   );
 }

@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={handleSubmit}
       className={`p-3 text-center relative my-3 flex items-center justify-center  ${
         disabled ? "cursor-wait" : "cursor-pointer"
-      }  text-white hover:bg-[#1db954e1] border-[1px] border-[#1db954e1] rounded-md transition duration-300 ease-in-out ${sx}`}
+      }  text-white hover:bg-primary border-[1px] border-primary rounded-md transition duration-300 ease-in-out ${sx}`}
     >
       <button disabled={disabled}>{text}</button>
       {loading && (
@@ -48,7 +48,7 @@ export const Button2: React.FC<ButtonProps> = ({
       disabled={disabled || loading} // Prevent multiple clicks while loading
       className={`p-3 text-center relative my-3 flex items-center justify-center ${
         disabled ? "cursor-not-allowed" : "cursor-pointer"
-      } text-black hover:bg-[#1db954e1] border-[1px] border-[#1db954e1] rounded-md transition duration-300 ease-in-out ${sx}`}
+      } text-black hover:bg-primary hover:text-white border-[1px] border-primary rounded-md transition duration-300 ease-in-out ${sx}`}
     >
       {loading ? "Submitting..." : text}
     </button>

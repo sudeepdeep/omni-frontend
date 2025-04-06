@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import UIStore from "../Store";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DefaultImage from "./DefaultImage";
 import Logo from "./Logo";
 import LogoUI from "../assets/CIVIC.png";
@@ -12,6 +12,7 @@ function Navbar() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const ui = UIStore.useState();
+  const navigate = useNavigate();
 
   console.log(ui);
 
@@ -96,6 +97,11 @@ function Navbar() {
           param: "",
         },
         {
+          url: `/userposts/${ui.userId}`,
+          text: "My Posts",
+          param: "",
+        },
+        {
           url: "/logout",
           text: "Logout",
           param: "",
@@ -110,6 +116,10 @@ function Navbar() {
     setActiveDropdown((prev) => (prev === text ? null : text));
   };
 
+  function handleRoutelogin(url: any) {
+    navigate(url);
+  }
+
   console.log(isMenuOpen);
 
   return (
@@ -117,7 +127,9 @@ function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-4 py-2">
         <div className="flex gap-2 items-center">
           <img src={LogoUI} width={30} />
-          <Logo />
+          <div className="mt-1">
+            <Logo />
+          </div>
         </div>
         <button
           className="lg:hidden text-2xl"
@@ -150,31 +162,37 @@ function Navbar() {
                     }`}
                   >
                     {navItem.subMenu.map((subItem) => (
-                      <a
+                      <p
                         key={subItem.text}
-                        href={subItem.url + "?page=" + subItem.param}
-                        className={`block px-4 py-2 ${
+                        onClick={() =>
+                          handleRoutelogin(
+                            subItem.url + "?page=" + subItem.param
+                          )
+                        }
+                        className={`cursor-pointer  block px-4 py-2 ${
                           location.pathname === subItem.url
                             ? "text-primary font-bold"
                             : "text-gray-600 hover:text-primary"
                         }`}
                       >
                         {subItem.text}
-                      </a>
+                      </p>
                     ))}
                   </div>
                 </>
               ) : (
-                <a
-                  href={navItem.url + "?page=" + navItem.param}
-                  className={`block px-4 py-2 hover:text-primary lg:py-0 ${
+                <p
+                  className={`block cursor-pointer px-4 py-2 hover:text-primary lg:py-0 ${
                     location.pathname === navItem.url
                       ? "text-primary font-bold"
                       : "text-gray-600 hover:text-primary"
                   }`}
+                  onClick={() =>
+                    handleRoutelogin(navItem.url + "?page=" + navItem.param)
+                  }
                 >
                   {navItem.text}
-                </a>
+                </p>
               )}
             </div>
           ))}

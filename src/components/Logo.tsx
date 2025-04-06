@@ -1,12 +1,16 @@
 import React from "react";
 
 const Logo: React.FC = () => {
-  return <span className="font-poppins font-bold">CIVIC REPORTS</span>;
+  return (
+    <span className="font-leagueSpartan font-bold tracking-tighter">
+      CIVIC REPORTS
+    </span>
+  );
 };
 
 export const LogoMain: React.FC = () => {
   return (
-    <div className="font-poppins text-3xl font-bold tracking-[2px]">
+    <div className="font-leagueSpartan text-4xl font-bold tracking-tighter">
       CIVIC REPORTS
     </div>
   );

@@ -153,7 +153,7 @@ const Register: React.FC = () => {
             <h4 className="font-normal text-black">
               Already have an account?{" "}
               <span
-                className="text-[#1DB954] cursor-pointer"
+                className="text-primary cursor-pointer"
                 onClick={() => navigate("/login")}
               >
                 Sign in ➞
@@ -259,7 +259,7 @@ const Register: React.FC = () => {
               text="Register"
               handleSubmit={handleRegister}
               loading={loading}
-              sx={"h-[40px] bg-[#1DB954d9]"}
+              sx={"h-[40px] bg-primary"}
             />
           </div>
 
@@ -270,7 +270,7 @@ const Register: React.FC = () => {
 
           <p className="md:w-[58%] w-[78%] text-[12px] my-[10px]">
             By creating an account, you agree to the{" "}
-            <a href="/privacy-policy" className="text-[#1DB954d9]">
+            <a href="/privacy-policy" className="text-primary">
               Terms of Service
             </a>
             . For more information about <Logo /> privacy practices. We'll

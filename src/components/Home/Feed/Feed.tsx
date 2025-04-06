@@ -5,7 +5,8 @@ import FeedPost from "./FeedPost";
 import { MainLoader } from "../../Loading";
 import { useSearchParams } from "react-router-dom";
 import axios from "../../../utils/axios";
-import { FeedStore } from "../../../Store";
+import { FeedStore, UserDetailsStore } from "../../../Store";
+import ErrorFallback from "../../ErrorFallback";
 
 export const convertApiItem = (newsItem: any) => ({
   title: newsItem?.title ?? "",
@@ -18,14 +19,18 @@ export const convertApiItem = (newsItem: any) => ({
   author:
     newsItem?.authorId?.firstName + " " + newsItem?.authorId?.lastName ||
     "Author",
+  username: newsItem?.authorId?.username,
   authorImage: newsItem?.authorId?.profileUrl,
   role: newsItem?.authorId?.role ?? "user",
   category: newsItem?.category ?? [],
   subCategory: newsItem?.subCategory ?? [],
+  _id: newsItem?._id,
+  isArchived: newsItem?.isArchived,
 });
 
 function Feed({ stocks, politics, news, finance, loading }: any) {
-  console.log(politics);
+  const userDetails = UserDetailsStore.useState();
+  console.log(politics, userDetails);
   const [searchParams] = useSearchParams();
   const param1 = searchParams.get("page");
   const param2 = searchParams.get("subPage");
@@ -33,7 +38,7 @@ function Feed({ stocks, politics, news, finance, loading }: any) {
   const param4 = searchParams.get("search");
   const param5 = searchParams.get("startDate");
   const param6 = searchParams.get("endDate");
-
+  const [error, setError] = useState<any>(null);
   const [allPosts, setAllPosts] = useState<any[]>([]);
   const [page, setPage] = useState<number>(0); // Track the current page for pagination
   const [hasMore, setHasMore] = useState<boolean>(true); // Track if more data is available
@@ -51,6 +56,7 @@ function Feed({ stocks, politics, news, finance, loading }: any) {
     authorImage: "",
     category: [newsItem?.content?.contentType ?? ""],
     subCategory: newsItem?.subCategory ?? [],
+    _id: newsItem?._id,
   });
 
   const convertPoliticalItem = (newsItem: any) => ({
@@ -84,18 +90,24 @@ function Feed({ stocks, politics, news, finance, loading }: any) {
       if (param6) searchQuery += `&endDate=${param6}`;
       searchQuery += `&limit=10&offset=${page * 10}`; // Pagination logic
 
-      const res = await axios.get(`/news/${searchQuery}`);
-      if (res?.data?.count > 0) {
-        const fetchedNews = res?.data?.results.map(convertApiItem);
-        FeedStore.update((s) => {
-          s.posts = fetchedNews;
+      const res = await axios
+        .get(`/news/${searchQuery}`)
+        .then((res) => {
+          if (res?.data?.count > 0) {
+            const fetchedNews = res?.data?.results.map(convertApiItem);
+            FeedStore.update((s) => {
+              s.posts = fetchedNews;
+            });
+            setAllPosts((prevPosts) => [...prevPosts, ...fetchedNews]);
+            setPage((prevPage) => prevPage + 1);
+            setHasMore(fetchedNews.length > 0); // Check if there are more posts to load
+          } else {
+            setHasMore(false); // No more posts to load
+          }
+        })
+        .catch((err) => {
+          setError(err);
         });
-        setAllPosts((prevPosts) => [...prevPosts, ...fetchedNews]);
-        setPage((prevPage) => prevPage + 1);
-        setHasMore(fetchedNews.length > 0); // Check if there are more posts to load
-      } else {
-        setHasMore(false); // No more posts to load
-      }
     } catch (err) {
       console.error("Error fetching news:", err);
     } finally {
@@ -160,12 +172,18 @@ function Feed({ stocks, politics, news, finance, loading }: any) {
     return () => subscription.unsubscribe();
   }, [isFetching, hasMore]);
 
+  if (error) {
+    return <ErrorFallback error={error} />;
+  }
+
   if (loading) return <MainLoader />;
 
   return (
     <div className="rounded-md h-[70vh] overflow-auto w-full p-4">
       {allPosts.length > 0 &&
-        allPosts.map((item, index) => <FeedPost key={index} news={item} />)}
+        allPosts.map((item, index) => (
+          <FeedPost key={index} news={item} userDetails={userDetails} />
+        ))}
       {isFetching && (
         <div
           role="status"

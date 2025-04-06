@@ -4,11 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#1DB954",
+        primary: "#3533cd",
       },
       fontFamily: {
         poppins: ["Poppins"],
         lemon: ["lemon"],
+        leagueSpartan: ["League Spartan"],
+        bungeeTint: ["Bungee Tint"],
       },
     },
   },

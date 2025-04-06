@@ -1,6 +1,6 @@
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import articleLoading from "../assets/loading.json";
 import articleLoading2 from "../assets/mainLoading.json";
 
@@ -10,6 +10,7 @@ import { AnimationLoading } from "./Loading";
 interface UploadPhotoProps {
   title?: string;
   handleChange?: (url: string) => void;
+  images?: any;
 }
 
 interface UploadPhotoProps2 {
@@ -22,6 +23,7 @@ interface UploadPhotoProps2 {
 export const UploadPhoto: React.FC<UploadPhotoProps> = ({
   title = "Cover photo",
   handleChange = () => {},
+  images = [],
 }) => {
   const [cover, setCover] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -55,6 +57,12 @@ export const UploadPhoto: React.FC<UploadPhotoProps> = ({
   function handleDeleteImage() {
     setCover([]);
   }
+
+  useEffect(() => {
+    if (images && images.length > 0) {
+      setCover(images);
+    }
+  }, [images]);
 
   if (loading) return <AnimationLoading animation={articleLoading2} />;
 
